@@ -35,18 +35,22 @@
 
 				<!-- Content -->
 				<article class="box post">
-					<div id="unity-fullscreen-button"></div>
-					<div id="unity-container" class="unity-desktop">
-						<canvas id="unity-canvas" width=960 height=540></canvas>
-						<div id="unity-loading-bar">
-							<div id="unity-logo"></div>
-							<div id="unity-progress-bar-empty">
-								<div id="unity-progress-bar-full"></div>
-							</div>
-						</div>
-						<div id="unity-warning"> </div>
 
+					<div id="unity-container" class="unity-desktop">
+						<div class="canvasdiv">
+							<canvas id="unity-canvas" width=960 height=540></canvas>
+							<div id="unity-fullscreen-button"></div>
+							<div id="unity-loading-bar">
+								<div id="unity-logo"></div>
+								<div id="unity-progress-bar-empty">
+									<div id="unity-progress-bar-full"></div>
+								</div>
+							</div>
+							<button id="unity-load-button">Play</button>
+							<div id="unity-warning"> </div>
+						</div>
 					</div>
+
 					<script>
 						var container = document.querySelector("#unity-container");
 						var canvas = document.querySelector("#unity-canvas");
@@ -54,6 +58,7 @@
 						var progressBarFull = document.querySelector("#unity-progress-bar-full");
 						var fullscreenButton = document.querySelector("#unity-fullscreen-button");
 						var warningBanner = document.querySelector("#unity-warning");
+						var loadButton = document.querySelector("#unity-load-button");
 
 						// Shows a temporary message banner/ribbon for a few seconds, or
 						// a permanent error message on top of the canvas if type=='error'.
@@ -127,18 +132,26 @@
 
 						var script = document.createElement("script");
 						script.src = loaderUrl;
-						script.onload = () => {
+						loadingBar.style.display = "none";
+						fullscreenButton.style.display = "none";
+						loadButton.addEventListener("click", function () {
+							loadButton.style.display = "none";
+							loadingBar.style.display = "block";
 							createUnityInstance(canvas, config, (progress) => {
 								progressBarFull.style.width = 100 * progress + "%";
 							}).then((unityInstance) => {
 								loadingBar.style.display = "none";
+								fullscreenButton.style.display = "block";
 								fullscreenButton.onclick = () => {
 									unityInstance.SetFullscreen(1);
 								};
 							}).catch((message) => {
 								alert(message);
 							});
-						};
+						});
+						loadButton.addEventListener("click", function () {
+							loadButton.disabled = true;
+						});
 						document.body.appendChild(script);
 					</script>
 
@@ -151,14 +164,14 @@
 							<h3>Controls</h3>
 						</header>
 						<ul>
-							<li>WASD to move</li>
-							<li>SPACE to jump</li>
-							<li>SHIFT to run</li>
+							<li><strong>WASD</strong> to move</li>
+							<li><strong>SPACE</strong> to jump</li>
+							<li><strong>SHIFT</strong> to run</li>
 						</ul>
 						<p>
 							In this project, I remade Super Mario World mechanics in Unity for a narrative with friends
 							of mine. The objective
-							of the game is to save the Information Systems junior enterprise’s mascot, who was taken
+							of the game is to save the Information Systems junior enterprise's mascot, who was taken
 							captive by a disguised
 							friend of ours. The game features personalized artwork for my friends, cutscenes, and a
 							final battle with a boss.

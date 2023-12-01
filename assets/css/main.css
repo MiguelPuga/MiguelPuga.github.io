@@ -2351,7 +2351,7 @@ ul.social li a.fa-google-plus:hover {
 /* Banner */
 
 #banner {
-	background: #CCE8F4 url("../../images/bg_home.png");
+	background: #CCE8F4 url("../../images/bg_home.gif");
 	background-position: center center;
 	background-size: auto 100%;
 	background-repeat: no-repeat;
@@ -2359,6 +2359,9 @@ ul.social li a.fa-google-plus:hover {
 	position: relative;
 	padding: 8em 0;
 	margin: 4em 0 0 0;
+	image-rendering: pixelated;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: crisp-edges;
 }
 
 #banner header {
@@ -2975,6 +2978,9 @@ ul.social li a.fa-google-plus:hover {
 		left: 15px;
 		top: 15px;
 		margin: -40px 0 40px -30px;
+		image-rendering: pixelated;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: crisp-edges;
 	}
 
 	.box.post header {
